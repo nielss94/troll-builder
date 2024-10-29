@@ -7,6 +7,8 @@ class_name Card
 @onready var spell_texture: Sprite2D = $SpellImage
 
 @export var spell: Spell
+@export var max_rotation_degrees: float = 10.0 # Maximum rotation in either direction
+var base_rotation: float = 0.0 # Store the card's initial rotation
 var tween: Tween
 
 func _ready():
@@ -15,7 +17,9 @@ func _ready():
 		description_label.text = _translate_spell_description(spell.description)
 		card_texture.texture = spell.card_texture
 		spell_texture.texture = spell.spell_texture
-
+	
+	base_rotation = rotation_degrees # Store initial rotation
+	
 	$Area2D.mouse_entered.connect(_on_area_2d_mouse_entered)
 	$Area2D.mouse_exited.connect(_on_area_2d_mouse_exited)
 	$Area2D.input_event.connect(_on_area_2d_input_event)
@@ -42,3 +46,12 @@ func _translate_spell_description(description: String) -> String:
 func _on_area_2d_input_event(_viewport, event: InputEvent, _shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		print("Clicked card: ", spell.name)
+
+func _process(_delta):
+	var mouse_pos = get_global_mouse_position()
+	var card_center = global_position
+	var x_diff = mouse_pos.x - card_center.x
+	var rotation_factor = clamp(x_diff / 500.0, -1.0, 1.0) # Adjust 500.0 to change distance sensitivity
+	
+	var target_rotation = base_rotation + (max_rotation_degrees * rotation_factor)
+	rotation_degrees = lerp(rotation_degrees, target_rotation, 0.1) # Adjust 0.1 to change rotation smoothness
