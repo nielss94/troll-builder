@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=3 format=3 uid="uid://dmfmcslyl4lqd"]
+
+[ext_resource type="Texture2D" uid="uid://ulgo0lcsb6x0" path="res://Card_green.png" id="1_4xirw"]
+[ext_resource type="Script" path="res://spells/spell.gd" id="1_htvx4"]
+
+[resource]
+script = ExtResource("1_htvx4")
+name = "Coleslaw"
+description = "You take a bite of this juicy slaw. Heal {heal}."
+card_texture = ExtResource("1_4xirw")
+damage = 0
+damage_to_self = 0
+cost = 0
+heal = 5
+heal_to_enemy = 0

@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://cd0vach5bmis8"]
+[gd_scene load_steps=8 format=3 uid="uid://cd0vach5bmis8"]
 
 [ext_resource type="PackedScene" uid="uid://ctfdn7fkr0gew" path="res://player/player.tscn" id="1_q5yfw"]
 [ext_resource type="PackedScene" uid="uid://c1gw8qulgn0cp" path="res://troll/troll.tscn" id="2_0miiv"]
+[ext_resource type="PackedScene" uid="uid://dt24pkfhcpxu8" path="res://card/card.tscn" id="3_iemer"]
+[ext_resource type="Resource" uid="uid://cl7wq0pgi33h5" path="res://spells/shuffle.tres" id="4_25ajk"]
+[ext_resource type="Resource" uid="uid://c76nrs3yacveg" path="res://spells/chomp.tres" id="4_a4euq"]
+[ext_resource type="Resource" uid="uid://bj6stqd01sclp" path="res://spells/harikiri.tres" id="5_gges7"]
+[ext_resource type="Resource" uid="uid://dmfmcslyl4lqd" path="res://spells/coleslaw.tres" id="6_cnhbg"]
 
 [node name="Level" type="Node2D"]
 
@@ -9,4 +14,24 @@
 position = Vector2(-39, 0)
 
 [node name="Troll" parent="." instance=ExtResource("2_0miiv")]
-position = Vector2(25, 0)
+position = Vector2(87, 0)
+
+[node name="Card" parent="." instance=ExtResource("3_iemer")]
+position = Vector2(-108, 119)
+spell = ExtResource("4_25ajk")
+
+[node name="Card2" parent="." instance=ExtResource("3_iemer")]
+position = Vector2(-24, 120)
+spell = ExtResource("5_gges7")
+
+[node name="Card3" parent="." instance=ExtResource("3_iemer")]
+position = Vector2(63, 118)
+spell = ExtResource("4_a4euq")
+
+[node name="Card4" parent="." instance=ExtResource("3_iemer")]
+position = Vector2(153, 120)
+spell = ExtResource("6_cnhbg")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(23, 22)
+zoom = Vector2(2, 2)

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=3 format=3 uid="uid://bj6stqd01sclp"]
+
+[ext_resource type="Script" path="res://spells/spell.gd" id="1_60ftf"]
+[ext_resource type="Texture2D" uid="uid://c0wfropf0n18q" path="res://Card_orange.png" id="1_nquvc"]
+
+[resource]
+script = ExtResource("1_60ftf")
+name = "Harikiri"
+description = "Take {damage_to_self} damage."
+card_texture = ExtResource("1_nquvc")
+damage = 0
+damage_to_self = 10
+cost = 0
+heal = 0
+heal_to_enemy = 0

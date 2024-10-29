@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://dt24pkfhcpxu8"]
+
+[ext_resource type="Script" path="res://card/card.gd" id="1_m65af"]
+[ext_resource type="Texture2D" uid="uid://c0wfropf0n18q" path="res://Card_orange.png" id="2_pelx0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ehdr7"]
+font_size = 13
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cnyh1"]
+size = Vector2(78, 102)
+
+[node name="Card" type="Node2D"]
+script = ExtResource("1_m65af")
+
+[node name="CardImage" type="Sprite2D" parent="."]
+texture = ExtResource("2_pelx0")
+
+[node name="Name" type="Label" parent="."]
+z_index = 1
+offset_left = -34.0
+offset_top = -48.0
+offset_right = 48.0
+offset_bottom = -25.0
+scale = Vector2(0.831754, 0.831754)
+theme_override_font_sizes/font_size = 12
+text = "asdasdasd"
+label_settings = SubResource("LabelSettings_ehdr7")
+autowrap_mode = 1
+
+[node name="Description" type="RichTextLabel" parent="."]
+z_index = 1
+offset_left = -32.0
+offset_top = 4.0
+offset_right = 50.0
+offset_bottom = 41.0
+scale = Vector2(0.780563, 0.795895)
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "asd sds dsd sdsdasd asd asasd asd aas das d"
+fit_content = true
+scroll_active = false
+autowrap_mode = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+z_index = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_cnyh1")
+
+[node name="SpellImage" type="Sprite2D" parent="."]
+position = Vector2(0, -18)
