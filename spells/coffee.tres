@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=3 format=3 uid="uid://cwaf5lnem1ivk"]
+
+[ext_resource type="Texture2D" uid="uid://bd0s11v1he6ei" path="res://Card_blue.png" id="1_i36ti"]
+[ext_resource type="Script" path="res://spells/spell.gd" id="2_sq4h4"]
+
+[resource]
+script = ExtResource("2_sq4h4")
+name = "Coffee"
+description = "Spend {cost} at Starbucks. Play two cards in your next turn"
+card_texture = ExtResource("1_i36ti")
+damage = 0
+damage_to_self = 0
+cost = 2
+heal = 0
+heal_to_enemy = 0

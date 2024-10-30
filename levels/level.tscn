@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cd0vach5bmis8"]
+[gd_scene load_steps=10 format=3 uid="uid://cd0vach5bmis8"]
 
 [ext_resource type="PackedScene" uid="uid://ctfdn7fkr0gew" path="res://player/player.tscn" id="1_q5yfw"]
 [ext_resource type="PackedScene" uid="uid://c1gw8qulgn0cp" path="res://troll/troll.tscn" id="2_0miiv"]
@@ -7,6 +7,10 @@
 [ext_resource type="Resource" uid="uid://c76nrs3yacveg" path="res://spells/chomp.tres" id="4_a4euq"]
 [ext_resource type="Resource" uid="uid://bj6stqd01sclp" path="res://spells/harikiri.tres" id="5_gges7"]
 [ext_resource type="Resource" uid="uid://dmfmcslyl4lqd" path="res://spells/coleslaw.tres" id="6_cnhbg"]
+[ext_resource type="Script" path="res://levels/card_container.gd" id="8_86hy2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eqk4w"]
+size = Vector2(575, 116)
 
 [node name="Level" type="Node2D"]
 
@@ -16,22 +20,34 @@ position = Vector2(-39, 0)
 [node name="Troll" parent="." instance=ExtResource("2_0miiv")]
 position = Vector2(87, 0)
 
-[node name="Card" parent="." instance=ExtResource("3_iemer")]
-position = Vector2(-108, 119)
-spell = ExtResource("4_25ajk")
-
-[node name="Card2" parent="." instance=ExtResource("3_iemer")]
-position = Vector2(-24, 120)
-spell = ExtResource("5_gges7")
-
-[node name="Card3" parent="." instance=ExtResource("3_iemer")]
-position = Vector2(63, 118)
-spell = ExtResource("4_a4euq")
-
-[node name="Card4" parent="." instance=ExtResource("3_iemer")]
-position = Vector2(153, 120)
-spell = ExtResource("6_cnhbg")
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(23, 22)
 zoom = Vector2(2, 2)
+
+[node name="CardContainer" type="Node2D" parent="."]
+script = ExtResource("8_86hy2")
+
+[node name="Card" parent="CardContainer" instance=ExtResource("3_iemer")]
+position = Vector2(-108, 119)
+spell = ExtResource("4_25ajk")
+
+[node name="Card2" parent="CardContainer" instance=ExtResource("3_iemer")]
+position = Vector2(-24, 120)
+spell = ExtResource("5_gges7")
+
+[node name="Card3" parent="CardContainer" instance=ExtResource("3_iemer")]
+position = Vector2(63, 118)
+spell = ExtResource("4_a4euq")
+
+[node name="Card4" parent="CardContainer" instance=ExtResource("3_iemer")]
+position = Vector2(153, 120)
+spell = ExtResource("6_cnhbg")
+
+[node name="Area2D" type="Area2D" parent="CardContainer"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CardContainer/Area2D"]
+position = Vector2(23.5, 123)
+shape = SubResource("RectangleShape2D_eqk4w")
+
+[connection signal="mouse_entered" from="CardContainer/Area2D" to="CardContainer" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="CardContainer/Area2D" to="CardContainer" method="_on_area_2d_mouse_exited"]

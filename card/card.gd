@@ -49,9 +49,11 @@ func _on_area_2d_input_event(_viewport, event: InputEvent, _shape_idx):
 
 func _process(_delta):
 	var mouse_pos = get_global_mouse_position()
+	var screen_center_x = get_viewport_rect().size.x / 2
 	var card_center = global_position
+
+	# Calculate rotation based on mouse x distance
 	var x_diff = mouse_pos.x - card_center.x
 	var rotation_factor = clamp(x_diff / 500.0, -1.0, 1.0) # Adjust 500.0 to change distance sensitivity
-	
-	var target_rotation = base_rotation + (max_rotation_degrees * rotation_factor)
-	rotation_degrees = lerp(rotation_degrees, target_rotation, 0.1) # Adjust 0.1 to change rotation smoothness
+	var target_rotation = base_rotation - (max_rotation_degrees * rotation_factor)
+	rotation_degrees = lerp(rotation_degrees, target_rotation, 0.1) # Adjust 0.1 to change rotation smoothness  
