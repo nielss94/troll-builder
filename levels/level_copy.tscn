@@ -1,10 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://s7x151843j60"]
+[gd_scene load_steps=13 format=3 uid="uid://cdxl0ipo1ieam"]
 
 [ext_resource type="PackedScene" uid="uid://ctfdn7fkr0gew" path="res://player/player.tscn" id="1_7umfa"]
 [ext_resource type="PackedScene" uid="uid://c1gw8qulgn0cp" path="res://troll/troll.tscn" id="2_v4n0c"]
 [ext_resource type="PackedScene" uid="uid://cdcx7hwey1wkl" path="res://hand/hand.tscn" id="3_e8iki"]
 [ext_resource type="PackedScene" uid="uid://dt24pkfhcpxu8" path="res://card/card.tscn" id="4_ok74e"]
+[ext_resource type="PackedScene" uid="uid://qpqasni7tx8b" path="res://hand/hand_slot.tscn" id="4_w7i0s"]
+[ext_resource type="Script" path="res://spells/spell.gd" id="5_8wpvd"]
 [ext_resource type="Texture2D" uid="uid://cb3ms6fq302s" path="res://icon.svg" id="5_jsf25"]
+[ext_resource type="Resource" uid="uid://c76nrs3yacveg" path="res://spells/chomp.tres" id="6_bq4xt"]
+[ext_resource type="Resource" uid="uid://cwaf5lnem1ivk" path="res://spells/coffee.tres" id="7_xulhv"]
+[ext_resource type="Resource" uid="uid://dmfmcslyl4lqd" path="res://spells/coleslaw.tres" id="8_o1g8l"]
+[ext_resource type="Resource" uid="uid://bj6stqd01sclp" path="res://spells/harikiri.tres" id="9_d1v2v"]
+[ext_resource type="Resource" uid="uid://cl7wq0pgi33h5" path="res://spells/shuffle.tres" id="10_1rkbj"]
 
 [node name="Levelhandtest" type="Node2D"]
 
@@ -19,6 +26,9 @@ zoom = Vector2(2, 2)
 
 [node name="Hand" parent="." instance=ExtResource("3_e8iki")]
 position = Vector2(-1, 101)
+hand_slot_scene = ExtResource("4_w7i0s")
+card_scene = ExtResource("4_ok74e")
+spells = Array[ExtResource("5_8wpvd")]([ExtResource("6_bq4xt"), ExtResource("7_xulhv"), ExtResource("8_o1g8l"), ExtResource("9_d1v2v"), ExtResource("10_1rkbj")])
 
 [node name="Add_Card" type="Button" parent="."]
 offset_left = 182.0
@@ -33,9 +43,6 @@ offset_top = 77.0
 offset_right = 261.0
 offset_bottom = 110.0
 text = "-1"
-
-[node name="Card" parent="." instance=ExtResource("4_ok74e")]
-position = Vector2(-201, 100)
 
 [node name="mid" type="Sprite2D" parent="."]
 scale = Vector2(0.025, 2.765)

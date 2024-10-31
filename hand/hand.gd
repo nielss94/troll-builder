@@ -1,9 +1,13 @@
 extends Node2D
 
-var card_count = 8
+var card_count = 6
 var cards = range(card_count)
 @onready var outline = $Area2D/CollisionShape2D
-const HandSlot = preload("res://hand/slot_area.gd") # Adjust the path to the actual location of HandSlot.gd
+@export var hand_slot_scene: PackedScene
+@export var card_scene: PackedScene
+@export var spells: Array[Spell] = []
+
+var selected_slot: HandSlot
 
 func _ready():
 	_create_slots()
@@ -25,7 +29,6 @@ func _create_slots():
 	var corrected_width = card_width
 	
 
-	
 	var x_offset = 0 
 	
 	if card_width > max_width:
@@ -40,16 +43,48 @@ func _create_slots():
 	# Create and position each HandSlot instance
 	for i in cards:
 		# Instantiate the HandSlot node
-		var hand_slot_instance = HandSlot.new()
-		
-		# Set up the hand slot with dimensions and index
-		hand_slot_instance.setup_slot(corrected_width, card_height, i)
+		var hand_slot_instance: HandSlot = hand_slot_scene.instantiate()
 		
 		# Position the hand slot horizontally
 		hand_slot_instance.position = Vector2(x_offset  +  i * corrected_width + corrected_width / 2 - outline_width / 2, 0)
+
+		# Instantiate the card node
+		var card_instance = card_scene.instantiate()
 		
-		# Add the HandSlot instance as a child of the outline
+		# # Initialize the card with a random spell
+		var random_spell: Spell = spells[randi() % spells.size()]
+		card_instance.init(random_spell)
+		
+		# Set up the hand slot with dimensions and index
+		hand_slot_instance.setup_slot(corrected_width, card_height, cards.find(i), card_instance)
+
+		# Add the card to the hand slot
+		hand_slot_instance.add_child(card_instance)
+
+		hand_slot_instance.hover.connect(_on_slot_mouse_entered)
+		hand_slot_instance.exit.connect(_on_slot_mouse_exited)
+		
+		# Add the HandSlot instance as a child of the scene tree root
 		outline.add_child(hand_slot_instance)	
+
+func _on_slot_mouse_entered(slot: HandSlot):
+	if selected_slot:
+		selected_slot.deselect()
+		selected_slot.click.disconnect(_on_slot_clicked)
+	
+	selected_slot = slot
+	selected_slot.select()
+	selected_slot.click.connect(_on_slot_clicked)
+	print("Selected slot: ", selected_slot.name)
+
+func _on_slot_mouse_exited(slot: HandSlot):
+	if selected_slot == slot:
+		selected_slot.deselect()
+		selected_slot.click.disconnect(_on_slot_clicked)
+		selected_slot = null
+
+func _on_slot_clicked(slot: HandSlot):
+	print("Clicked slot: ", slot.name)
 
 func _on_area_2d_mouse_entered():
 	print("Entered Hand")	 
