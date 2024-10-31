@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://s7x151843j60"]
+
+[ext_resource type="PackedScene" uid="uid://ctfdn7fkr0gew" path="res://player/player.tscn" id="1_7umfa"]
+[ext_resource type="PackedScene" uid="uid://c1gw8qulgn0cp" path="res://troll/troll.tscn" id="2_v4n0c"]
+[ext_resource type="PackedScene" uid="uid://cdcx7hwey1wkl" path="res://hand/hand.tscn" id="3_e8iki"]
+[ext_resource type="PackedScene" uid="uid://dt24pkfhcpxu8" path="res://card/card.tscn" id="4_ok74e"]
+[ext_resource type="Texture2D" uid="uid://cb3ms6fq302s" path="res://icon.svg" id="5_jsf25"]
+
+[node name="Levelhandtest" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_7umfa")]
+position = Vector2(-267, -123)
+
+[node name="Troll" parent="." instance=ExtResource("2_v4n0c")]
+position = Vector2(259, -125)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Hand" parent="." instance=ExtResource("3_e8iki")]
+position = Vector2(-1, 101)
+
+[node name="Add_Card" type="Button" parent="."]
+offset_left = 182.0
+offset_top = 79.0
+offset_right = 210.0
+offset_bottom = 108.0
+text = "+1"
+
+[node name="Remove_Card" type="Button" parent="."]
+offset_left = 232.0
+offset_top = 77.0
+offset_right = 261.0
+offset_bottom = 110.0
+text = "-1"
+
+[node name="Card" parent="." instance=ExtResource("4_ok74e")]
+position = Vector2(-201, 100)
+
+[node name="mid" type="Sprite2D" parent="."]
+scale = Vector2(0.025, 2.765)
+texture = ExtResource("5_jsf25")
+
+[connection signal="pressed" from="Add_Card" to="Hand" method="_on_add_card_pressed"]
+[connection signal="pressed" from="Remove_Card" to="Hand" method="_on_remove_card_pressed"]
