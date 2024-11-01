@@ -5,6 +5,8 @@ class_name Card
 @export var max_rotation_degrees: float = 10.0 # Maximum rotation in either direction
 var base_rotation: float = 0.0 # Store the card's initial rotation
 var tween: Tween
+var flip_amount: float = 0.0
+
 
 func _ready():
 	if spell:
@@ -27,6 +29,11 @@ func _translate_spell_description(description: String) -> String:
 	return description
 
 func _process(_delta):
+	
+	# ??????????????????????????????????
+	# material.flip_amount = flip_amount
+	
+	
 	var mouse_pos = get_global_mouse_position()
 	var screen_center_x = get_viewport_rect().size.x / 2
 	var card_center = global_position

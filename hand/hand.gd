@@ -28,15 +28,17 @@ func _create_slots():
 	var card_width = outline_width / card_count
 	var corrected_width = card_width
 	
-
 	var x_offset = 0 
 	
+	
 	if card_width > max_width:
-		var total_width = len(cards) * max_width
-		 
+		
+		# calculate x_offset to center align slots
+		var total_width = len(cards) * max_width	 
 		x_offset = (outline_width - total_width) * 0.5
+		
+		# set used width to max width
 		corrected_width = max_width
-		print(x_offset)
 		
 	var card_height = outline_height
 	
@@ -54,15 +56,18 @@ func _create_slots():
 		# # Initialize the card with a random spell
 		var random_spell: Spell = spells[randi() % spells.size()]
 		card_instance.init(random_spell)
-		
+		card_instance.flip_amount = 0.5
 		# Set up the hand slot with dimensions and index
 		hand_slot_instance.setup_slot(corrected_width, card_height, cards.find(i), card_instance)
 
+		
 		# Add the card to the hand slot
 		hand_slot_instance.add_child(card_instance)
 
 		hand_slot_instance.hover.connect(_on_slot_mouse_entered)
 		hand_slot_instance.exit.connect(_on_slot_mouse_exited)
+		
+		
 		
 		# Add the HandSlot instance as a child of the scene tree root
 		outline.add_child(hand_slot_instance)	

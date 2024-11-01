@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cb4xvx4tg2du2"]
+
+[ext_resource type="Shader" path="res://fold_shader.gdshader" id="1_jnini"]
+[ext_resource type="Texture2D" uid="uid://cb3ms6fq302s" path="res://icon.svg" id="2_utqwt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e6sf7"]
+shader = ExtResource("1_jnini")
+shader_parameter/flip_amount = 0.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_e6sf7")
+scale = Vector2(0.75, 1)
+texture = ExtResource("2_utqwt")
