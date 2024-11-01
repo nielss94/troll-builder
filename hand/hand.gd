@@ -56,7 +56,7 @@ func _create_slots():
 		# # Initialize the card with a random spell
 		var random_spell: Spell = spells[randi() % spells.size()]
 		card_instance.init(random_spell)
-		card_instance.flip_amount = 0.5
+		
 		# Set up the hand slot with dimensions and index
 		hand_slot_instance.setup_slot(corrected_width, card_height, cards.find(i), card_instance)
 

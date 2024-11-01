@@ -29,11 +29,6 @@ func _translate_spell_description(description: String) -> String:
 	return description
 
 func _process(_delta):
-	
-	# ??????????????????????????????????
-	# material.flip_amount = flip_amount
-	
-	
 	var mouse_pos = get_global_mouse_position()
 	var screen_center_x = get_viewport_rect().size.x / 2
 	var card_center = global_position
@@ -42,7 +37,13 @@ func _process(_delta):
 	var x_diff = mouse_pos.x - card_center.x
 	var rotation_factor = clamp(x_diff / 500.0, -1.0, 1.0) # Adjust 500.0 to change distance sensitivity
 	var target_rotation = base_rotation - (max_rotation_degrees * rotation_factor)
-	rotation_degrees = lerp(rotation_degrees, target_rotation, 0.1) # Adjust 0.1 to change rotation smoothness  
+	rotation_degrees = lerp(rotation_degrees, target_rotation, 0.1) # Adjust 0.1 to change rotation smoothness 
+
+	# HIERZO FLIP AMOUNT SETTEN
+	material.set_shader_parameter("flip_amount", flip_amount)
+
+	# zoiets? geen idee wat dit doet maar moet je maar ff kijken
+	flip_amount = rotation_degrees / max_rotation_degrees
 
 func select():
 	if tween:
